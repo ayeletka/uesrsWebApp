@@ -6,6 +6,11 @@ namespace myWebApp.Models
     {
         private List<string> listOfUsers;
         public string input;
+
+        public Users()
+        {
+            listOfUsers = new List<string>();
+        }
         public void setUsersList(string user)
         {
             listOfUsers.Add(user);

@@ -1,11 +1,13 @@
 ﻿
 
 using System.Web.Mvc;
+using myWebApp.Models;
 
 namespace myWebApp.Controllers
 {
     public class HomeController : Controller
     {
+        private Users usersDB = new Users();
         public ActionResult Index()
         {
             return View();
@@ -15,7 +17,14 @@ namespace myWebApp.Controllers
         public ActionResult AddUser()
         {
             string user = Request.Form[0];
-            return View();
+            usersDB.setUsersList(user);
+            return View("~/Views/Home/About.cshtml");
+        }
+
+      
+        public ActionResult ShowUsers()
+        {
+            return View("~/Views/Home/Contact.cshtml", usersDB);
         }
 
         public ActionResult About()
@@ -29,7 +38,7 @@ namespace myWebApp.Controllers
         {
             ViewBag.Message = "Your contact page.";
 
-            return View();
+            return View(usersDB);
         }
     }
 }
