@@ -2,12 +2,21 @@
 
 using System.Web.Mvc;
 using myWebApp.Models;
+using System.Web;
+
+using myWebApp.Models;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Web;
+using System.Web.Mvc;
+using System.Web.Optimization;
+using System.Web.Routing;
 
 namespace myWebApp.Controllers
 {
     public class HomeController : Controller
     {
-        private Users usersDB = new Users();
         public ActionResult Index()
         {
             return View();
@@ -17,14 +26,17 @@ namespace myWebApp.Controllers
         public ActionResult AddUser()
         {
             string user = Request.Form[0];
-            usersDB.setUsersList(user);
+            Users userDBTmp = (Users) HttpContext.Application["userDB"];
+            userDBTmp.setUsersList(user);
+            HttpContext.Application["userDB"] = userDBTmp;
             return View("~/Views/Home/About.cshtml");
         }
 
       
         public ActionResult ShowUsers()
         {
-            return View("~/Views/Home/Contact.cshtml", usersDB);
+            Users tmp3 = (Users) HttpContext.Application["userDB"];
+            return View("~/Views/Home/Contact.cshtml", tmp3);
         }
 
         public ActionResult About()
@@ -38,7 +50,7 @@ namespace myWebApp.Controllers
         {
             ViewBag.Message = "Your contact page.";
 
-            return View(usersDB);
+            return View(HttpContext.Application["userDB"]);
         }
     }
 }

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using myWebApp.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -16,6 +17,10 @@ namespace myWebApp
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
-        }
+            Users usersDB = new Users();
+            usersDB.setUsersList("l");
+            HttpContext.Current.Application["usersDB"] = (Users) usersDB;
+
     }
+}
 }
