@@ -1,4 +1,4 @@
-﻿@model myWebApp.Models.Users
+﻿@model List<myWebApp.Models.UserData>
 @{
     ViewBag.Title = "Contact";
 }
@@ -10,7 +10,7 @@
 
 </form>
 
-@foreach (var element in Model.getUsersList())
-{
-    <p>@Html.DisplayFor(m => element)</p>
-}
+    @foreach (var element in Model.ToList())
+    {
+        <p>@Html.DisplayFor(m => element.Name)</p>
+    }

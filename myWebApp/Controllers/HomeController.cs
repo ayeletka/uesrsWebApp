@@ -26,16 +26,18 @@ namespace myWebApp.Controllers
         public ActionResult AddUser()
         {
             string user = Request.Form[0];
-            Users userDBTmp = (Users) HttpContext.Application["userDB"];
-            userDBTmp.setUsersList(user);
-            HttpContext.Application["userDB"] = userDBTmp;
+            Users userDB = new Users();
+            //Users userDBTmp = (Users) HttpContext.Application["userDB"];
+            // userDBTmp.setUsersList(user);
+            userDB.setUsersList(user);
+            //HttpContext.Application["userDB"] = userDBTmp;
             return View("~/Views/Home/About.cshtml");
         }
 
       
         public ActionResult ShowUsers()
         {
-            Users tmp3 = (Users) HttpContext.Application["userDB"];
+            var tmp3 = new Users().getUsersList();
             return View("~/Views/Home/Contact.cshtml", tmp3);
         }
 
@@ -50,7 +52,10 @@ namespace myWebApp.Controllers
         {
             ViewBag.Message = "Your contact page.";
 
-            return View(HttpContext.Application["userDB"]);
+            //return View(HttpContext.Application["userDB"]);
+
+            //var tmp3 = new Users().getUsersList();
+            return View("~/Views/Home/Contact.cshtml", new List<UserData>());
         }
     }
 }
