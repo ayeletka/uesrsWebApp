@@ -7,8 +7,7 @@ namespace myWebApp.Models
 {
     public class Users
     {
-        private List<UserData> listOfUsers;
-        public string input;
+        private List<UserData> _listOfUsers;
         private  readonly string _userDataFilePath = $@"{System.IO.Path.GetTempPath()}\usersData.json";
        
         public Users()
@@ -21,27 +20,25 @@ namespace myWebApp.Models
             if (File.Exists(_userDataFilePath))
             {
                 var jsonFile = File.ReadAllText(_userDataFilePath);
-                listOfUsers = Newtonsoft.Json.JsonConvert.DeserializeObject<List<UserData>>(jsonFile);
+                _listOfUsers = Newtonsoft.Json.JsonConvert.DeserializeObject<List<UserData>>(jsonFile);
             }
             else
             {
-                listOfUsers = new List<UserData>();
+                _listOfUsers = new List<UserData>();
             }
         }
 
-        public void setUsersList(string user)
+        public void AddUserName(string user)
         {
             //TODO: support multi save lock
             //UserSer.Instance.Add(user);
-
-            listOfUsers.Add(new UserData { Name = user });
-            var jsonStr = Newtonsoft.Json.JsonConvert.SerializeObject(listOfUsers);
+            _listOfUsers.Add(new UserData { Name = user });
+            var jsonStr = Newtonsoft.Json.JsonConvert.SerializeObject(_listOfUsers);
             File.WriteAllText(_userDataFilePath, jsonStr);
-
         }
         public List<UserData> getUsersList()
         {
-            return listOfUsers;
+            return _listOfUsers;
         }
 
     }

@@ -3,15 +3,9 @@
 using System.Web.Mvc;
 using myWebApp.Models;
 using System.Web;
-
-using myWebApp.Models;
-using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Web;
-using System.Web.Mvc;
-using System.Web.Optimization;
-using System.Web.Routing;
+
 
 namespace myWebApp.Controllers
 {
@@ -25,37 +19,30 @@ namespace myWebApp.Controllers
         [HttpPost]
         public ActionResult AddUser()
         {
-            string user = Request.Form[0];
-            Users userDB = new Users();
+            string userName = Request.Form[0];
+            Users currUsersList = new Users();
             //Users userDBTmp = (Users) HttpContext.Application["userDB"];
-            // userDBTmp.setUsersList(user);
-            userDB.setUsersList(user);
             //HttpContext.Application["userDB"] = userDBTmp;
-            return View("~/Views/Home/About.cshtml");
+            currUsersList.AddUserName(userName);
+            return View("~/Views/Home/CollectingUsersNames.cshtml");
         }
 
-      
         public ActionResult ShowUsers()
         {
-            var tmp3 = new Users().getUsersList();
-            return View("~/Views/Home/Contact.cshtml", tmp3);
+            var usersList = new Users().getUsersList();
+            return View("~/Views/Home/ShowUserslist.cshtml", usersList);
         }
 
-        public ActionResult About()
+        public ActionResult CollectingUsersNames()
         {
-            ViewBag.Message = "Collecting Users Names";
-
+            ViewBag.Message = "Collecting User Names";
             return View();
         }
 
-        public ActionResult Contact()
+        public ActionResult ShowUserslist()
         {
-            ViewBag.Message = "Your contact page.";
-
-            //return View(HttpContext.Application["userDB"]);
-
-            //var tmp3 = new Users().getUsersList();
-            return View("~/Views/Home/Contact.cshtml", new List<UserData>());
+            ViewBag.Message = "Click the button to see all users";
+            return View("~/Views/Home/ShowUserslist.cshtml", new List<UserData>());
         }
     }
 }

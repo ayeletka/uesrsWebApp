@@ -1,16 +1,16 @@
 ﻿@model List<myWebApp.Models.UserData>
 @{
-    ViewBag.Title = "Contact";
+    ViewBag.Title = "Show All Users";
 }
-<h2>@ViewBag.Title.</h2>
+@*<h2>@ViewBag.Title.</h2>*@
 <h3>@ViewBag.Message</h3>
 
 <form action="/Home/ShowUsers" method="get">
     <input type="button" value="Show all users" onclick="location.href='@Url.Action("ShowUsers", "Home")'" />
-
 </form>
+    
 
-    @foreach (var element in Model.ToList())
-    {
-        <p>@Html.DisplayFor(m => element.Name)</p>
-    }
+@foreach (var element in Model.ToList())
+{
+    <p>@Html.DisplayFor(m => element.Name)</p>
+}
