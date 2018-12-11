@@ -1,12 +1,12 @@
 ﻿@model List<myWebApp.Models.User>
 @{
-    ViewBag.Title = "Show All Users";
+    ViewBag.Title = "Show All UsersRepository";
 }
 @*<h2>@ViewBag.Title.</h2>*@
 <h3>@ViewBag.Message</h3>
 
 <form action="/Home/ShowUsers" method="get">
-    <input type="button" value="Show all users" onclick="location.href='@Url.Action("ShowUsers", "Home")'" />
+    <input type="button" value="Show all users" onclick="location.href = '@Url.Action("GetUsers", "Home")'" />
 </form>
     
 
